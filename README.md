@@ -6,10 +6,12 @@ their top tracks**
 ## Technologies
 
 - Fronted
+
 The project uses React JS
 It uses D3.js for visualization
 
 - Backend
+
 The project uses Flask to interact with APIs (Spotify and Lastfm)
 
 
