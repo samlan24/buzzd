@@ -13,10 +13,10 @@ const RecommendationGraph = ({ artists, onArtistClick }) => {
     const height = 600;
     const radius = Math.min(width, height) / 2;
 
-    svg.attr("width", width).attr("height", height).selectAll("*").remove(); // Clear previous content
+    svg.attr("width", width).attr("height", height).selectAll("*").remove();
 
     const g = svg.append("g")
-      .attr("transform", `translate(${width / 2},${height / 2})`); // Center the graph
+      .attr("transform", `translate(${width / 2},${height / 2})`);
 
     const tree = d3.tree()
       .size([2 * Math.PI, radius - 100]);
@@ -43,7 +43,7 @@ const RecommendationGraph = ({ artists, onArtistClick }) => {
       `);
 
     node.append("circle")
-      .attr("r", 10) // Increased radius for better visibility
+      .attr("r", 10)
       .attr("class", "clickable")
       .on("click", (event, d) => {
         event.stopPropagation();

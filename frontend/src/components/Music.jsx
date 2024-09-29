@@ -46,7 +46,7 @@ const Music = () => {
   const handleArtistClick = (clickedArtist) => {
     const encodedArtist = encodeURIComponent(clickedArtist).replace(/%20/g, '+');
     navigate(`/music/${encodedArtist}`);
-    setRecommendationsFetched(false); // Reset the flag when navigating to a new artist
+    setRecommendationsFetched(false);
   };
 
   const handleSearchSubmit = (e) => {
@@ -76,7 +76,7 @@ const Music = () => {
             <h1 className='music-heading'>Related Artists</h1>
             <RecommendationGraph
               artists={recommendations}
-              onArtistClick={handleArtistClick} // Pass the click handler
+              onArtistClick={handleArtistClick}
             />
           </div>
           {currentTrack && (

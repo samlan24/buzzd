@@ -26,23 +26,23 @@
 
 /* Suggestions list styling */
 .search-form-container {
-    position: relative; /* This allows the suggestions list to be positioned absolutely within this container */
+    position: relative;
 }
 
 .suggestions-list {
     list-style: none;
     padding: 0;
-    margin: 0; /* Remove margin to prevent pushing elements */
+    margin: 0;
     width: 100%;
     background-color: #fff;
     border-radius: 4px;
     max-height: 200px;
     overflow-y: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: absolute; /* Use absolute positioning */
-    top: 100%; /* Position it below the input */
-    left: 0; /* Align it to the left */
-    z-index: 1000; /* Ensure it appears above other elements */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
 }
 
 .suggestions-list li {
