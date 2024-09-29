@@ -1,0 +1,71 @@
+.search-form {
+    display: flex;
+}
+
+.home-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.search-button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: #555;
+}
+
+/* Suggestions list styling */
+.search-form-container {
+    position: relative; /* This allows the suggestions list to be positioned absolutely within this container */
+}
+
+.suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Remove margin to prevent pushing elements */
+    width: 100%;
+    background-color: #fff;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Use absolute positioning */
+    top: 100%; /* Position it below the input */
+    left: 0; /* Align it to the left */
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.suggestions-list li {
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.suggestions-list li:hover {
+    background-color: #f0f0f0;
+}
+
+.suggestions-list li:focus {
+    outline: none;
+}
+
+.search-input {
+    padding: 12px 15px; /* Adjust padding for comfort */
+    font-size: 16px; /* Set font size */
+    border: 2px solid #ccc; /* Thicker border for a bolder look */
+    border-radius: 20px; /* Rounded edges */
+    outline: none; /* Remove default outline */
+
+    width: 100%; /* Full width */
+    margin-right: 10px; /* Spacing between input and button */
+}

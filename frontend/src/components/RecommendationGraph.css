@@ -1,0 +1,32 @@
+/* src/components/RecommendationGraph.css */
+
+.link {
+  fill: none;
+  stroke: #ccc; /* Lighter color for better visibility */
+  stroke-opacity: 0.6; /* Increase opacity for links */
+  stroke-width: 2px; /* Slightly thicker for a more pronounced effect */
+  transition: stroke-opacity 0.3s ease; /* Transition for hover effect */
+}
+
+.node circle {
+  fill: #ffab40; /* Bright, warm color */
+  stroke: #ff9800; /* Slightly darker stroke for contrast */
+  stroke-width: 2px; /* Thicker stroke */
+  transition: transform 0.2s ease; /* Smooth scaling on hover */
+}
+
+.node circle:hover {
+  transform: scale(1.2); /* Scale up the circle on hover */
+}
+
+.node text {
+  font: 12px sans-serif; /* Larger font size */
+  fill: #333; /* Darker text color for better readability */
+  pointer-events: auto; /* Allow pointer events */
+  text-shadow: 0 1px 0 #fff; /* Light shadow for depth */
+  transition: fill 0.2s ease; /* Transition for hover effect */
+}
+
+.node text:hover {
+  fill: #ff5722; /* Change color on hover */
+}
