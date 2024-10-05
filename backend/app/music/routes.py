@@ -108,7 +108,7 @@ def get_similar_songs():
     song_id = results['tracks']['items'][0]['id']
 
     # Get recommendations based on the song ID
-    recommendations = sp.recommendations(seed_tracks=[song_id], limit=20)
+    recommendations = sp.recommendations(seed_tracks=[song_id], limit=30)
 
     # Extract relevant information from recommendations
     similar_songs = []
