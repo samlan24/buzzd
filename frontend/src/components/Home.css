@@ -13,8 +13,22 @@ body {
 
 h1 {
   margin-bottom: 10px;
-  font-size: 24px;
+  font-size: 2rem;
   color: #333;
+}
+
+
+@keyframes scroll {
+  0% { transform: translateY(100%); opacity: 0; }
+  10% { transform: translateY(0); opacity: 1; }
+  90% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100%); opacity: 0; }
+}
+
+.scrolling-word {
+  display: inline-block;
+  animation: scroll 5s ease-in-out infinite;
+  position: relative;
 }
 
 

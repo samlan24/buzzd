@@ -1,3 +1,4 @@
+
 .search-form-container{
     display: flex;
     align-items: center;
@@ -85,12 +86,19 @@
 .search-dropdown {
     padding: 10px; /* Padding for dropdown */
     border: none;
+    background-color: transparent;
+    color: #333;
+    font-size: 1rem;
 }
 
 .search-dropdown:hover {
-    background-color: #f0f0f0; /* Change background color on hover */
+    background-color: transparent;
+    border: none; /* Change background color on hover */
 }
 .search-dropdown:focus {
     outline: none; /* Remove default focus outline */
 }
+
+
+
 
