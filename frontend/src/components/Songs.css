@@ -1,0 +1,49 @@
+.music-container {
+    padding: 20px;
+}
+
+.searched-song-details {
+    margin-bottom: 20px;
+}
+
+.recommended-songs-list {
+    list-style: none;
+    padding: 0;
+}
+
+.recommended-songs-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* Add a bottom border for separation */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space between song name and button */
+}
+
+.recommended-songs-list li button {
+    background: none; /* Remove default button styling */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor on hover */
+}
+
+.recommended-songs-list img {
+    margin-right: 10px; /* Space between image and text */
+}
+
+.song-name {
+    cursor: pointer; /* Change cursor to pointer */
+    color: #333; /* Link color */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and color */
+    padding: 5px 10px; /* Add some padding for a bubbly effect */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Hover effect */
+.song-name:hover {
+    /* Light blue background on hover */
+    color: #ff5722; /* Darker blue on hover */
+}
+
+/* Active effect when clicked */
+.song-name:active {
+    background-color: rgba(0, 123, 255, 0.2); /* Slightly darker blue when clicked */
+}
