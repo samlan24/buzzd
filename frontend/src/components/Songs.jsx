@@ -1,4 +1,3 @@
-// src/components/Songs.jsx
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -22,9 +21,8 @@ const Songs = () => {
 
   const fetchSongDetails = async (songName) => {
     try {
-      // Fetch details of the searched song
       const response = await axios.get(`http://localhost:5000/music/song-details?query=${encodeURIComponent(songName)}`);
-      setSearchedSong(response.data.song); // Set searched song details
+      setSearchedSong(response.data.song);
     } catch (error) {
       console.error('Error fetching song details:', error);
     }
@@ -32,9 +30,8 @@ const Songs = () => {
 
   const fetchSimilarSongs = async (songName) => {
     try {
-      // Fetch similar songs based on the searched song's name
       const response = await axios.get(`http://localhost:5000/music/similar-songs?song=${encodeURIComponent(songName)}`);
-      setRecommendedSongs(response.data.similar_songs); // Set recommended songs
+      setRecommendedSongs(response.data.similar_songs);
     } catch (error) {
       console.error('Error fetching similar songs:', error);
     }
@@ -49,57 +46,61 @@ const Songs = () => {
         audioRef.current.pause();
       }
       setPlayingTrack(track);
-      audioRef.current.src = track.preview_url; // Assuming each track has a preview_url property
+      audioRef.current.src = track.preview_url;
       audioRef.current.play();
     }
   };
 
   const handleRecommendedSongClick = async (clickedSong) => {
-    // Update searched song details with clicked song's info
     setSearchedSong(clickedSong);
-
-    // Fetch new recommendations based on the clicked song
-    await fetchSimilarSongs(clickedSong.name); // Fetch similar songs using the clicked song's name
+    await fetchSimilarSongs(clickedSong.name);
   };
 
   return (
-    <div className="songs-container">
-      {/* Display searched song details */}
+    <div className="music-container">
       {searchedSong && (
-        <div className="searched-song-details">
-          <h2>{searchedSong.name}</h2>
-          <p>Artist: {searchedSong.artist}</p>
-          <img src={searchedSong.album_cover} alt={`${searchedSong.name} cover`} style={{ width: '150px', height: 'auto' }} />
-          {searchedSong.preview_url && ( // Check if preview_url exists for the searched song
-            <button onClick={() => handlePlayPause(searchedSong)}>
-              <FontAwesomeIcon icon={playingTrack === searchedSong ? faPause : faPlay} style={{ color: '#f13238' }} />
-            </button>
-          )}
+        <div className="searched-song">
+          <div className="song-details">
+            <img
+              src={searchedSong.album_cover}
+              alt={`${searchedSong.name} cover`}
+              className="song-cover"
+            />
+            <div className="song-info">
+              <h2>{searchedSong.name}</h2>
+              <p>Artist: {searchedSong.artist}</p>
+              {searchedSong.preview_url && (
+                <button onClick={() => handlePlayPause(searchedSong)}>
+                  <FontAwesomeIcon icon={playingTrack === searchedSong ? faPause : faPlay} className="play-icon" />
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       )}
 
-      {/* Display recommended songs */}
-      <h3>Recommended Songs</h3>
-      <ul className="recommended-songs-list">
+      <h3 className="recommended-title">Recommended Songs</h3>
+      <div className="recommended-songs">
         {recommendedSongs.map((song, index) => (
-          <li key={index}>
-            <img src={song.album_cover} alt={`${song.name} cover`} style={{ width: '50px', height: 'auto' }} /> {/* Displaying recommended song's album cover */}
-            <span
-              className="song-name"
-              onClick={() => handleRecommendedSongClick(song)}
-            >
-              {song.name}
-            </span> by {song.artist}
-            {song.preview_url && ( // Check if preview_url exists
-              <button onClick={() => handlePlayPause(song)}>
-                <FontAwesomeIcon icon={playingTrack === song ? faPause : faPlay} style={{ color: '#f13238' }} />
-              </button>
-            )}
-          </li>
+          <div className="recommended-song" key={index}>
+            <img src={song.album_cover} alt={`${song.name} cover`} className="recommended-cover" />
+            <div className="recommended-info">
+              <span
+                className="song-name"
+                onClick={() => handleRecommendedSongClick(song)}
+              >
+                {song.name}
+              </span>
+              by {song.artist}
+              {song.preview_url && (
+                <button onClick={() => handlePlayPause(song)}>
+                  <FontAwesomeIcon icon={playingTrack === song ? faPause : faPlay} className="play-icon" />
+                </button>
+              )}
+            </div>
+          </div>
         ))}
-      </ul>
-
-      {/* Audio element for playing previews */}
+      </div>
       <audio ref={audioRef} onEnded={() => setPlayingTrack(null)} />
     </div>
   );
