@@ -95,4 +95,73 @@ def get_artist_suggestions():
 
     return jsonify({'suggestions': suggestions})
 
+@music.route('/similar-songs', methods=['GET'])
+def get_similar_songs():
+    """Route to recommend similar songs based on the provided song name"""
+    song_name = request.args.get('song', 'Shape of You')  # Default song if none is provided
 
+    # Search for the song to get its ID
+    results = sp.search(q=song_name, type='track')
+    if not results['tracks']['items']:
+        return jsonify({'error': 'Song not found'}), 404
+
+    song_id = results['tracks']['items'][0]['id']
+
+    # Get recommendations based on the song ID
+    recommendations = sp.recommendations(seed_tracks=[song_id], target_energy=0.7, target_danceability=0.6, limit=20)
+
+    # Extract relevant information from recommendations
+    similar_songs = []
+    for track in recommendations['tracks']:
+        song_info = {
+            'name': track['name'],
+            'artist': ', '.join(artist['name'] for artist in track['artists']),
+            'preview_url': track.get('preview_url'),  # 30-second sample URL
+            'album_cover': track['album']['images'][0]['url'] if track['album']['images'] else ''
+        }
+        similar_songs.append(song_info)
+
+    return jsonify({'similar_songs': similar_songs})
+
+
+@music.route('/song-suggestions', methods=['GET'])
+def get_song_suggestions():
+    """Route to get song suggestions based on the query"""
+    query = request.args.get('query')
+    if not query:
+        return jsonify({'error': 'Query parameter is required'}), 400
+
+    # Search for songs on Spotify
+    results = sp.search(q=query, type='track', limit=5)
+
+    # Check if any songs were found
+    if not results['tracks']['items']:
+        return jsonify({'suggestions': []})
+
+    # Extract relevant information from search results
+    suggestions = [{'name': track['name'], 'artist': ', '.join(artist['name'] for artist in track['artists'])} for track in results['tracks']['items']]
+
+    return jsonify({'suggestions': suggestions})
+
+@music.route('/song-details', methods=['GET'])
+def get_song_details():
+    """Route to get details of a specific song"""
+    song_name = request.args.get('query')
+
+    if not song_name:
+        return jsonify({'error': 'Query parameter is required'}), 400
+
+    # Search for the song to get its ID
+    results = sp.search(q=song_name, type='track')
+    if not results['tracks']['items']:
+        return jsonify({'error': 'Song not found'}), 404
+
+    track = results['tracks']['items'][0]  # Get the first matching track
+    song_info = {
+        'name': track['name'],
+        'artist': ', '.join(artist['name'] for artist in track['artists']),
+        'preview_url': track.get('preview_url'),  # 30-second sample URL
+        'album_cover': track['album']['images'][0]['url'] if track['album']['images'] else ''
+    }
+
+    return jsonify({'song': song_info})
